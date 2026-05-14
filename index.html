@@ -67,7 +67,7 @@
             transform: translate(-50%, -50%);
             border-radius: 50%;
             pointer-events: none;
-            z-index: 10000;
+            z-index: 100000;
         }
 
         .cursor-dot {
@@ -178,9 +178,204 @@
             width: 100vw;
             height: 100vh;
             pointer-events: none;
-            z-index: 9999;
+            z-index: 999999;
             opacity: 0.05;
             background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+        }
+
+        /* Preloader styling */
+        .preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: transparent;
+            z-index: 99999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            pointer-events: all;
+            overflow: hidden;
+        }
+
+        .preloader-bg-shutter {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            z-index: -1;
+        }
+
+        .shutter-col {
+            flex: 1;
+            height: 100%;
+            background-color: var(--bg);
+            transition: transform 1s cubic-bezier(0.85, 0, 0.15, 1);
+            border-right: 1px solid rgba(0, 255, 178, 0.03);
+            transform: translateY(0);
+        }
+
+        .preloader.loaded .shutter-col {
+            transform: translateY(-100%);
+        }
+
+        /* Staggered delay curtain pull */
+        .shutter-col:nth-child(1) { transition-delay: 0.1s; }
+        .shutter-col:nth-child(2) { transition-delay: 0.25s; }
+        .shutter-col:nth-child(3) { transition-delay: 0.4s; }
+
+        .preloader-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1.5rem;
+            transition: opacity 0.5s ease, transform 0.5s ease;
+            z-index: 2;
+        }
+
+        .preloader.loaded .preloader-content,
+        .preloader.loaded .loader-footer,
+        .preloader.loaded .loader-counter,
+        .preloader.loaded .loader-metadata,
+        .preloader.loaded .loader-terminal-feed {
+            opacity: 0 !important;
+            transform: translateY(-20px) !important;
+            pointer-events: none;
+        }
+
+        .loader-symbol {
+            width: 80px;
+            height: 80px;
+        }
+
+        .loader-symbol svg {
+            width: 100%;
+            height: 100%;
+            transform-box: fill-box;
+        }
+
+        .outer-ring {
+            transform-origin: center;
+            animation: spinRight 4s linear infinite;
+            opacity: 0.4;
+        }
+
+        .inner-ring {
+            transform-origin: center;
+            animation: spinLeft 2s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+        }
+
+        .core-dot {
+            transform-origin: center;
+            animation: pulseCore 1.5s ease-in-out infinite alternate;
+        }
+
+        @keyframes spinRight {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        @keyframes spinLeft {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(-360deg); }
+        }
+
+        @keyframes pulseCore {
+            0% { transform: scale(0.8); opacity: 0.6; fill: var(--white); }
+            100% { transform: scale(1.2); opacity: 1; fill: var(--accent); }
+        }
+
+        .loader-text {
+            font-family: 'DM Mono', monospace;
+            font-size: 0.7rem;
+            letter-spacing: 4px;
+            color: var(--white);
+            text-transform: uppercase;
+            height: 1rem;
+            transition: opacity 0.4s ease;
+        }
+
+        /* Large Outline Counter */
+        .loader-counter {
+            position: absolute;
+            bottom: 4rem;
+            right: 5vw;
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: clamp(4rem, 12vw, 10rem);
+            color: transparent;
+            -webkit-text-stroke: 1px rgba(255, 255, 255, 0.15);
+            line-height: 0.8;
+            display: flex;
+            align-items: baseline;
+            z-index: 2;
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+
+        .loader-counter .pct {
+            font-size: 1.5rem;
+            -webkit-text-stroke: 1px var(--accent);
+            margin-left: 0.5rem;
+            font-family: 'DM Mono', monospace;
+        }
+
+        /* Tech Label metadata */
+        .loader-metadata {
+            position: absolute;
+            top: 3rem;
+            left: 5vw;
+            font-family: 'DM Mono', monospace;
+            font-size: 0.6rem;
+            letter-spacing: 3px;
+            color: var(--white);
+            opacity: 0.4;
+            z-index: 2;
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+
+        /* Mini Terminal stream */
+        .loader-terminal-feed {
+            position: absolute;
+            bottom: 4rem;
+            left: 5vw;
+            font-family: 'DM Mono', monospace;
+            font-size: 0.6rem;
+            color: var(--accent);
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            gap: 0.4rem;
+            text-align: left;
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+
+        .terminal-line {
+            opacity: 0;
+            transform: translateY(5px);
+            transition: opacity 0.3s ease, transform 0.3s ease;
+            letter-spacing: 1px;
+        }
+
+        .loader-footer {
+            position: absolute;
+            bottom: 1.5rem;
+            left: 50%;
+            transform: translateX(-50%);
+            font-family: 'DM Mono', monospace;
+            font-size: 0.6rem;
+            letter-spacing: 2px;
+            color: var(--white);
+            opacity: 0.25;
+            text-transform: uppercase;
+            z-index: 2;
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+
+        body.loading {
+            overflow: hidden;
+            height: 100vh;
         }
 
         /* Typography */
@@ -1580,7 +1775,42 @@
     </style>
 </head>
 
-<body>
+<body class="loading">
+
+    <div id="preloader" class="preloader">
+        <div class="preloader-bg-shutter">
+            <div class="shutter-col"></div>
+            <div class="shutter-col"></div>
+            <div class="shutter-col"></div>
+        </div>
+
+        <div class="loader-metadata">// BOOT_SEQ // v2.026</div>
+
+        <div class="preloader-content">
+            <div class="loader-symbol">
+                <svg viewBox="0 0 100 100">
+                    <!-- Minimalist technical line art elements -->
+                    <circle class="outer-ring" cx="50" cy="50" r="44" fill="none" stroke="var(--white)" stroke-width="0.75" stroke-dasharray="8 14" />
+                    <circle class="inner-ring" cx="50" cy="50" r="32" fill="none" stroke="var(--accent)" stroke-width="1.5" stroke-dasharray="110 90" />
+                    <circle class="core-dot" cx="50" cy="50" r="4.5" fill="var(--white)" />
+                    <path d="M 50,6 L 50,12 M 50,88 L 50,94 M 6,50 L 12,50 M 88,50 L 94,50" stroke="rgba(255, 255, 255, 0.25)" stroke-width="1" />
+                </svg>
+            </div>
+            <div class="loader-text">SYSTEM READY</div>
+        </div>
+
+        <div class="loader-terminal-feed">
+            <div class="terminal-line">> BOOTING CORE... [OK]</div>
+            <div class="terminal-line">> FETCHING ASSETS... [OK]</div>
+            <div class="terminal-line">> SYNCING INTERACTION ENGINE... [RUN]</div>
+        </div>
+
+        <div class="loader-counter">
+            <span class="count">000</span><span class="pct">%</span>
+        </div>
+
+        <div class="loader-footer">KAVURI PAVAN SAI &copy; 2026</div>
+    </div>
 
     <div class="grain"></div>
     <div class="cursor-dot"></div>
@@ -2003,27 +2233,103 @@
             }
         });
 
-        // Scroll Reveal
-        const revealElements = document.querySelectorAll('.reveal');
-        const revealObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('active');
-                    revealObserver.unobserve(entry.target);
+        // Elite Preloader Sequence logic
+        window.addEventListener('DOMContentLoaded', () => {
+            const countEl = document.querySelector('.loader-counter .count');
+            const textEl = document.querySelector('.loader-text');
+            const terminalLines = document.querySelectorAll('.terminal-line');
+            let currentPercent = 0;
+            
+            const chars = '!<>-_\\/[]{}—=+*^?#________';
+            const targetText = "INITIALIZING SYSTEM...";
+            
+            // Start Counting Engine
+            const loadInterval = setInterval(() => {
+                // Simulates variable system latency speeds for realism
+                const increment = currentPercent < 20 ? 1 : 
+                                  currentPercent < 75 ? Math.floor(Math.random() * 4) + 1 : 
+                                  Math.floor(Math.random() * 2) + 1;
+                                  
+                currentPercent += increment;
+                
+                if (currentPercent >= 100) {
+                    currentPercent = 100;
+                    clearInterval(loadInterval);
+                    
+                    if(textEl) textEl.textContent = targetText;
+                    
+                    // Finish up and trigger architectural shutter
+                    setTimeout(deactivateLoader, 400);
+                } else {
+                    // Update counter padding
+                    if(countEl) countEl.textContent = String(currentPercent).padStart(3, '0');
+                    
+                    // Hacker Character Resolver effect
+                    let scrambled = "";
+                    const solvedLetters = Math.floor((currentPercent / 100) * targetText.length);
+                    for(let i=0; i < targetText.length; i++) {
+                        if(i < solvedLetters) {
+                            scrambled += targetText[i];
+                        } else {
+                            scrambled += chars[Math.floor(Math.random() * chars.length)];
+                        }
+                    }
+                    if(textEl) textEl.textContent = scrambled;
                 }
+            }, 35); // Complete run within 3 - 3.5 seconds.
+
+            // Feed terminals staggered
+            terminalLines.forEach((line, index) => {
+                setTimeout(() => {
+                    line.style.opacity = "0.8";
+                    line.style.transform = "translateY(0)";
+                }, 600 * (index + 1));
             });
-        }, {
-            threshold: 0.1
         });
 
-        revealElements.forEach(el => {
-            revealObserver.observe(el);
-        });
+        function deactivateLoader() {
+            const preloader = document.getElementById('preloader');
+            if (!preloader || preloader.classList.contains('loaded')) return;
 
-        // Remove glitch class after animation
+            // Triggers slide-up transform panel cascade
+            preloader.classList.add('loaded');
+            document.body.classList.remove('loading');
+
+            // Reveal Hero items just as the panels are clearing
+            setTimeout(() => {
+                initScrollReveals();
+            }, 500);
+
+            // Hard clear display
+            setTimeout(() => {
+                preloader.style.display = 'none';
+            }, 1500);
+        }
+
+        // Scroll Reveal Manager
+        function initScrollReveals() {
+            const revealElements = document.querySelectorAll('.reveal');
+            const revealObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                        revealObserver.unobserve(entry.target);
+                    }
+                });
+            }, {
+                threshold: 0.08
+            });
+
+            revealElements.forEach(el => {
+                revealObserver.observe(el);
+            });
+        }
+
+        // Remove glitch class after load
         setTimeout(() => {
-            document.querySelector('.glitch-load').style.textShadow = 'none';
-        }, 1500);
+            const loaderGlitch = document.querySelector('.glitch-load');
+            if(loaderGlitch) loaderGlitch.style.textShadow = 'none';
+        }, 2500);
     </script>
 </body>
 
