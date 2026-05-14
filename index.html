@@ -118,6 +118,15 @@
             color: #FFFFFF;
         }
 
+        /* Pink cursor variant */
+        body.cursor-pink .cursor-dot {
+            background-color: var(--accent2);
+        }
+
+        body.cursor-pink .cursor-ring {
+            color: var(--accent2);
+        }
+
         /* Hovering Inversion Effect */
         body.hovering .cursor-dot {
             width: 3px;
@@ -1444,9 +1453,9 @@
         <div class="container contact-container">
             <div class="label"
                 style="color: var(--bg); border-bottom: 1px solid var(--bg); display: inline-block; padding-bottom: 0.5rem; margin-bottom: 2rem;">
-                04 / LET'S TALK</div>
+                <span style="font-weight: 700;">04</span> / LET'S TALK</div>
 
-            <h2 class="contact-title bebas">GOT A PROJECT?</h2>
+            <h2 class="contact-title bebas hover-white-target">GOT A PROJECT?</h2>
             <p class="contact-sub">Whether it's automating your business or building something from scratch &mdash; I'm
                 ready.</p>
 
@@ -1527,10 +1536,20 @@
             }
 
 
+            // Pink cursor for specific text
+            if (elementUnder && elementUnder.closest('.contact-sub, #contact .label')) {
+                document.body.classList.add('cursor-pink');
+                document.body.classList.remove('cursor-dark');
+                document.body.classList.remove('cursor-white');
+            } else {
+                document.body.classList.remove('cursor-pink');
+            }
+
             // White cursor for specific text elements and cards
-            if (elementUnder && elementUnder.closest('.hero-accent-line, .hero-label, .hero-scroll, .contact-title, .contact-sub, .terminal-text, .about-line, .hover-white-target, #about .label span, .expertise-card, .stat-box, .project-skeleton')) {
+            if (elementUnder && elementUnder.closest('.hero-accent-line, .hero-label, .hero-scroll, .contact-title, .terminal-text, .about-line, .hover-white-target, #about .label span, .expertise-card, .stat-box, .project-skeleton') && !elementUnder.closest('.contact-sub, #contact .label')) {
                 document.body.classList.add('cursor-white');
                 document.body.classList.remove('cursor-dark');
+                document.body.classList.remove('cursor-pink');
             } else {
                 document.body.classList.remove('cursor-white');
             }
