@@ -994,31 +994,44 @@
 
         .hero-scroll {
             position: absolute;
-            bottom: 10vh;
+            bottom: 5vh;
             right: 5vw;
-            writing-mode: vertical-rl;
-            font-size: 0.75rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.8rem;
+            font-family: 'DM Mono', monospace;
+            font-size: 0.7rem;
             color: var(--accent);
-            letter-spacing: 2px;
-            animation: bounce 2s infinite;
+            letter-spacing: 3px;
+            z-index: 10;
         }
 
-        @keyframes bounce {
+        .hero-scroll span {
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
+            font-weight: 600;
+        }
 
-            0%,
-            20%,
-            50%,
-            80%,
+        .hero-scroll .arrow {
+            writing-mode: horizontal-tb;
+            display: inline-block;
+            font-size: 1.1rem;
+            line-height: 1;
+            animation: scrollGlide 2s cubic-bezier(0.85, 0, 0.15, 1) infinite;
+        }
+
+        @keyframes scrollGlide {
+            0% {
+                transform: translateY(-6px);
+                opacity: 0;
+            }
+            50% {
+                opacity: 1;
+            }
             100% {
-                transform: translateY(0);
-            }
-
-            40% {
-                transform: translateY(-10px);
-            }
-
-            60% {
-                transform: translateY(-5px);
+                transform: translateY(8px);
+                opacity: 0;
             }
         }
 
@@ -1698,6 +1711,10 @@
 
         /* Responsive */
         @media (max-width: 768px) {
+            .hero-scroll {
+                display: none;
+            }
+
             .nav-links {
                 display: none;
             }
@@ -1892,7 +1909,10 @@
         </div>
 
         <div class="hero-bottom-left">B.Tech CSE &middot; NIAT &middot; Guntur, AP</div>
-        <div class="hero-scroll">SCROLL &darr;</div>
+        <div class="hero-scroll">
+            <span>SCROLL</span>
+            <span class="arrow">&darr;</span>
+        </div>
     </section>
 
     <section id="about" class="container reveal">
