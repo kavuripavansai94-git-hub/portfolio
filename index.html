@@ -836,8 +836,32 @@
             border: 1px solid rgba(0, 255, 178, 0.2);
             padding: 3rem 2rem;
             position: relative;
-            background: var(--bg);
-            transition: transform 0.3s ease, border-color 0.3s ease;
+            background: rgba(15, 15, 15, 0.6);
+            backdrop-filter: blur(5px);
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            clip-path: polygon(0 0, 100% 0, 100% calc(100% - 20px), calc(100% - 20px) 100%, 0 100%);
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .expertise-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(0, 255, 178, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 255, 178, 0.03) 1px, transparent 1px);
+            background-size: 20px 20px;
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .expertise-card:hover::before {
+            opacity: 1;
         }
 
         .card-bar {
@@ -847,12 +871,13 @@
             width: 3px;
             height: 40px;
             background-color: var(--accent);
-            transition: height 0.3s ease;
+            transition: height 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         .expertise-card:hover {
-            transform: translateX(-4px);
-            border-color: var(--accent);
+            transform: translateY(-5px);
+            border-color: rgba(0, 255, 178, 0.4);
+            box-shadow: inset 0 0 20px rgba(0, 255, 178, 0.05), 0 10px 30px -10px rgba(0, 255, 178, 0.15);
         }
 
         .expertise-card:hover .card-bar {
@@ -863,6 +888,12 @@
             font-size: 1.5rem;
             color: var(--muted);
             margin-bottom: 1rem;
+            transition: color 0.3s ease, text-shadow 0.3s ease;
+        }
+
+        .expertise-card:hover .card-num {
+            color: var(--accent);
+            text-shadow: 0 0 10px rgba(0, 255, 178, 0.5);
         }
 
         .card-title {
@@ -883,13 +914,23 @@
             display: flex;
             flex-wrap: wrap;
             gap: 0.5rem;
+            position: relative;
+            z-index: 2;
         }
 
         .tag {
             font-size: 0.7rem;
             padding: 0.25rem 0.5rem;
-            border: 1px solid var(--muted);
+            border: 1px solid rgba(255, 255, 255, 0.1);
             color: var(--white);
+            background: rgba(255, 255, 255, 0.02);
+            transition: all 0.3s ease;
+        }
+
+        .expertise-card:hover .tag {
+            border-color: rgba(0, 255, 178, 0.3);
+            color: var(--accent);
+            background: rgba(0, 255, 178, 0.05);
         }
 
         /* Projects Section */
@@ -1246,7 +1287,9 @@
     <section id="skills">
         <div class="container reveal">
             <div class="section-header">
-                <div class="label">02 / EXPERTISE</div>
+                <div class="label" style="color: var(--white); opacity: 0.7;">
+                    <span class="hover-white-target" style="color: var(--accent); font-weight: 700;">02</span> / EXPERTISE
+                </div>
             </div>
 
             <div class="expertise-grid">
@@ -1397,7 +1440,7 @@
 
 
             // White cursor for specific text elements
-            if (elementUnder && elementUnder.closest('.hero-accent-line, .hero-label, .hero-scroll, .contact-title, .contact-sub, .work-placeholder, .terminal-text, .about-line, #about .label span')) {
+            if (elementUnder && elementUnder.closest('.hero-accent-line, .hero-label, .hero-scroll, .contact-title, .contact-sub, .work-placeholder, .terminal-text, .about-line, .hover-white-target, #about .label span')) {
                 document.body.classList.add('cursor-white');
                 document.body.classList.remove('cursor-dark');
             } else {
