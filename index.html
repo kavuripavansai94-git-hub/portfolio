@@ -1527,8 +1527,8 @@
             }
 
 
-            // White cursor for specific text elements
-            if (elementUnder && elementUnder.closest('.hero-accent-line, .hero-label, .hero-scroll, .contact-title, .contact-sub, .work-placeholder, .terminal-text, .about-line, .hover-white-target, #about .label span')) {
+            // White cursor for specific text elements and cards
+            if (elementUnder && elementUnder.closest('.hero-accent-line, .hero-label, .hero-scroll, .contact-title, .contact-sub, .terminal-text, .about-line, .hover-white-target, #about .label span, .expertise-card, .stat-box, .project-skeleton')) {
                 document.body.classList.add('cursor-white');
                 document.body.classList.remove('cursor-dark');
             } else {
