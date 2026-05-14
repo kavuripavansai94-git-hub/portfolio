@@ -40,6 +40,16 @@
             line-height: 1.6;
         }
 
+        /* Touch Device Cursor Fallback */
+        @media (hover: none) and (pointer: coarse) {
+            * {
+                cursor: auto !important;
+            }
+            .cursor-dot, .cursor-ring {
+                display: none !important;
+            }
+        }
+
         /* Custom Cursor */
         .cursor-dot,
         .cursor-ring {
@@ -271,12 +281,119 @@
             width: 100%;
         }
 
+        /* Hamburger Animation */
         .hamburger {
             display: none;
-            color: var(--white);
-            font-size: 1.5rem;
             background: none;
             border: none;
+            cursor: pointer;
+            z-index: 1001;
+            position: relative;
+            width: 30px;
+            height: 24px;
+        }
+
+        .hamburger span {
+            position: absolute;
+            height: 2px;
+            width: 100%;
+            background: var(--white);
+            border-radius: 2px;
+            left: 0;
+            transition: 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .hamburger span:nth-child(1) { top: 0; }
+        .hamburger span:nth-child(2) { top: 11px; }
+        .hamburger span:nth-child(3) { top: 22px; }
+
+        .hamburger.active span:nth-child(1) {
+            top: 11px;
+            transform: rotate(45deg);
+            background: var(--accent);
+        }
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+        .hamburger.active span:nth-child(3) {
+            top: 11px;
+            transform: rotate(-45deg);
+            background: var(--accent);
+        }
+
+        /* Mobile Menu */
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(2, 2, 10, 0.95);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            z-index: 999;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .mobile-menu.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .mobile-menu-links {
+            display: flex;
+            flex-direction: column;
+            gap: 2.5rem;
+            text-align: center;
+        }
+
+        .mobile-link {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 4rem;
+            color: var(--white);
+            transform: translateY(20px);
+            opacity: 0;
+            transition: transform 0.4s ease, opacity 0.4s ease;
+        }
+
+        .mobile-menu.active .mobile-link {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .mobile-menu.active .mobile-link:nth-child(1) { transition-delay: 0.1s; }
+        .mobile-menu.active .mobile-link:nth-child(2) { transition-delay: 0.2s; }
+        .mobile-menu.active .mobile-link:nth-child(3) { transition-delay: 0.3s; }
+        .mobile-menu.active .mobile-link:nth-child(4) { transition-delay: 0.4s; }
+
+        .mobile-link:hover {
+            color: var(--accent);
+        }
+
+        .mobile-socials {
+            margin-top: 4rem;
+            display: flex;
+            gap: 2rem;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.4s ease 0.5s;
+            font-size: 0.8rem;
+            color: var(--accent);
+        }
+
+        .mobile-menu.active .mobile-socials {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        body.menu-open {
+            overflow: hidden;
         }
 
         /* Hero */
@@ -680,7 +797,7 @@
             font-size: clamp(2rem, 4vw, 3rem);
             color: var(--accent);
             margin-bottom: 2rem;
-            line-height: 1.1;
+            line-height: 0.95;
         }
 
         .about-content p {
@@ -1070,12 +1187,35 @@
             }
         }
 
-        /* Contact Section */
+        /* Contact Section & Marquee */
+        .marquee-wrapper {
+            width: 100%;
+            background: var(--white);
+            color: var(--bg);
+            padding: 1rem 0;
+            overflow: hidden;
+            white-space: nowrap;
+            display: flex;
+            align-items: center;
+        }
+
+        .marquee-track {
+            display: inline-block;
+            animation: marquee 20s linear infinite;
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 2.5rem;
+            letter-spacing: 4px;
+        }
+
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
         #contact {
             padding: 8rem 0;
             background: var(--accent);
             color: var(--bg);
-            border-top: 4px solid var(--white);
             position: relative;
         }
 
@@ -1200,6 +1340,8 @@
 
         .footer-right {
             color: var(--accent);
+            letter-spacing: 4px;
+            font-weight: 600;
         }
 
         /* Responsive */
@@ -1210,6 +1352,17 @@
 
             .hamburger {
                 display: block;
+            }
+
+            .rotating-text {
+                transform: scale(0.6) translateY(-50%);
+                transform-origin: right center;
+                right: -30px;
+                opacity: 0.3;
+            }
+
+            .hero-name {
+                font-size: clamp(3rem, 15vw, 6rem);
             }
 
             .about-grid {
@@ -1241,6 +1394,10 @@
                 grid-template-columns: 1fr;
             }
 
+            .projects-loading-grid {
+                grid-template-columns: 1fr;
+            }
+
             .section-header {
                 flex-direction: column;
                 align-items: flex-start;
@@ -1251,6 +1408,10 @@
                 right: 5vw;
                 font-size: 1.2rem;
                 padding: 0.5rem 1rem;
+            }
+
+            .contact-title {
+                font-size: clamp(3rem, 12vw, 5rem);
             }
 
             footer {
@@ -1276,8 +1437,27 @@
             <a href="#work">// Work</a>
             <a href="#contact">// Contact</a>
         </div>
-        <button class="hamburger">☰</button>
+        <button class="hamburger" aria-label="Toggle Menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
     </nav>
+
+    <div id="mobile-menu" class="mobile-menu">
+        <div class="mobile-menu-links">
+            <a href="#about" class="mobile-link" onclick="toggleMobileMenu()">// About</a>
+            <a href="#skills" class="mobile-link" onclick="toggleMobileMenu()">// Skills</a>
+            <a href="#work" class="mobile-link" onclick="toggleMobileMenu()">// Work</a>
+            <a href="#contact" class="mobile-link" onclick="toggleMobileMenu()">// Contact</a>
+        </div>
+        <div class="mobile-socials">
+            <a href="https://www.linkedin.com/in/pavan-sai-kavuri" target="_blank">// LKD</a>
+            <a href="https://github.com/kavuripavansai94-git-hub" target="_blank">// GH</a>
+            <a href="https://www.instagram.com/pavan_sai_94?igsh=MXFyNnIzcDZkdmExMQ==" target="_blank">// IG</a>
+            <a href="https://wa.me/917337523427" target="_blank">// WA</a>
+        </div>
+    </div>
 
     <section id="hero">
         <div class="hero-grid"></div>
@@ -1448,6 +1628,12 @@
         </div>
     </section>
 
+    <div class="marquee-wrapper">
+        <div class="marquee-track">
+            /// AVAILABLE FOR FREELANCE /// LET'S BUILD /// AVAILABLE FOR FREELANCE /// LET'S BUILD /// AVAILABLE FOR FREELANCE /// LET'S BUILD /// AVAILABLE FOR FREELANCE /// LET'S BUILD /// AVAILABLE FOR FREELANCE /// LET'S BUILD /// AVAILABLE FOR FREELANCE /// LET'S BUILD /// 
+        </div>
+    </div>
+
     <section id="contact" class="reveal">
         <div class="breakout-box"><span class="breakout-text">READY TO SHIP</span></div>
         <div class="container contact-container">
@@ -1493,6 +1679,31 @@
         let mouseY = 0;
         let ringX = 0;
         let ringY = 0;
+
+        // Mobile Menu Logic
+        const hamburger = document.querySelector('.hamburger');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        function toggleMobileMenu() {
+            hamburger.classList.toggle('active');
+            mobileMenu.classList.toggle('active');
+            document.body.classList.toggle('menu-open');
+        }
+
+        hamburger.addEventListener('click', toggleMobileMenu);
+
+        // Infinite Micro-Glitch
+        const heroName = document.querySelector('.hero-name');
+        setInterval(() => {
+            if (Math.random() > 0.8) {
+                heroName.style.textShadow = `2px 2px 0 var(--accent), -2px -2px 0 var(--accent2)`;
+                heroName.style.transform = `translate(${Math.random() * 2 - 1}px, ${Math.random() * 2 - 1}px)`;
+                setTimeout(() => {
+                    heroName.style.textShadow = 'none';
+                    heroName.style.transform = 'translate(0)';
+                }, 100);
+            }
+        }, 5000);
 
         // Color detection helper — checks if a color string matches neon green
         function isNeonGreen(colorStr) {
