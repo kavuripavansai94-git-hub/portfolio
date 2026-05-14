@@ -1569,7 +1569,7 @@
 
             // 2. Check Interactive Elements via elementFromPoint
             if (!isHovering && elementUnder) {
-                if (elementUnder.closest('a, button, .expertise-card, .project-skeleton, .cta-btn, .about-content h2, .stat-box, .hover-white-target')) {
+                if (elementUnder.closest('a, button, .cta-btn, .about-content h2, .hover-white-target, .stat-val, .stat-label, .card-num, .card-title, .card-desc, .tag, .terminal-text, .skeleton-line')) {
                     isHovering = true;
                 }
             }
