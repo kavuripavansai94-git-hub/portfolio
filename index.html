@@ -641,7 +641,15 @@
             position: relative;
         }
 
-        .section-num::before {
+        .about-line {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 20px; /* wider hover target area */
+            height: 100%;
+        }
+
+        .about-line::before {
             content: '';
             position: absolute;
             top: 0;
@@ -655,7 +663,7 @@
             box-shadow: 0 0 8px rgba(0, 255, 178, 0.4), 0 0 20px rgba(0, 255, 178, 0.1);
         }
 
-        .reveal.active .section-num::before {
+        .reveal.active .about-line::before {
             transform: scaleY(1);
         }
 
@@ -676,26 +684,45 @@
         .stats-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 1rem;
+            gap: 1.5rem;
             margin-top: 3rem;
-            border-top: 2px solid var(--border);
-            border-bottom: 2px solid var(--border);
         }
 
         .stat-box {
-            padding: 2rem 1rem;
-            border-right: 2px solid var(--border);
+            padding: 2.5rem 1rem;
+            border: 1px solid rgba(0, 255, 178, 0.15);
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             text-align: center;
-            background: var(--surface);
-            transition: background 0.3s, transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.6s ease;
+            background: rgba(15, 15, 15, 0.6);
+            backdrop-filter: blur(5px);
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
             opacity: 0;
             transform: translateY(20px);
             position: relative;
-            overflow: hidden;
+            clip-path: polygon(0 0, 100% 0, 100% calc(100% - 15px), calc(100% - 15px) 100%, 0 100%);
+        }
+
+        .stat-box::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(0, 255, 178, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 255, 178, 0.05) 1px, transparent 1px);
+            background-size: 20px 20px;
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .stat-box:hover::before {
+            opacity: 1;
         }
 
         .stat-box::after {
@@ -753,21 +780,30 @@
 
         .stat-box:hover {
             background: rgba(0, 255, 178, 0.05);
-        }
-
-        .stat-box:last-child {
-            border-right: none;
+            transform: translateY(-5px);
+            border-color: rgba(0, 255, 178, 0.4);
+            box-shadow: inset 0 0 20px rgba(0, 255, 178, 0.05), 0 10px 30px -10px rgba(0, 255, 178, 0.15);
         }
 
         .stat-val {
-            font-size: 2rem;
+            font-size: 3rem;
             color: var(--white);
             margin-bottom: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .stat-box:hover .stat-val {
+            color: var(--accent);
+            text-shadow: 0 0 15px rgba(0, 255, 178, 0.4);
+            transform: scale(1.05);
         }
 
         .stat-label {
-            font-size: 0.7rem;
+            font-size: 0.75rem;
             color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
         }
 
         /* Expertise Section */
@@ -1175,7 +1211,10 @@
         <div class="label" style="color: var(--white); opacity: 0.7;"><span
                 style="color: var(--accent); font-weight: 700;">01</span> / ABOUT</div>
         <div class="about-grid" style="margin-top: 2rem;">
-            <div class="section-num bebas">01</div>
+            <div class="section-num bebas">
+                <div class="about-line"></div>
+                01
+            </div>
             <div class="about-content">
                 <h2 class="syne">Engineer in the making.<br>Builder by choice.</h2>
                 <p>B.Tech CSE student obsessed with AI automation and building systems that actually work. While others
@@ -1358,7 +1397,7 @@
 
 
             // White cursor for specific text elements
-            if (elementUnder && elementUnder.closest('.hero-accent-line, .hero-label, .hero-scroll, .contact-title, .contact-sub, .work-placeholder, .terminal-text')) {
+            if (elementUnder && elementUnder.closest('.hero-accent-line, .hero-label, .hero-scroll, .contact-title, .contact-sub, .work-placeholder, .terminal-text, .about-line, #about .label span')) {
                 document.body.classList.add('cursor-white');
                 document.body.classList.remove('cursor-dark');
             } else {
