@@ -1449,7 +1449,7 @@
     </section>
 
     <section id="contact" class="reveal">
-        <div class="breakout-box">READY TO SHIP</div>
+        <div class="breakout-box"><span class="breakout-text">READY TO SHIP</span></div>
         <div class="container contact-container">
             <div class="label"
                 style="color: var(--bg); border-bottom: 1px solid var(--bg); display: inline-block; padding-bottom: 0.5rem; margin-bottom: 2rem;">
@@ -1546,7 +1546,7 @@
             }
 
             // White cursor for specific text elements and cards
-            if (elementUnder && elementUnder.closest('.hero-accent-line, .hero-label, .hero-scroll, .contact-title, .terminal-text, .about-line, .hover-white-target, #about .label span, .expertise-card, .stat-box, .project-skeleton') && !elementUnder.closest('.contact-sub, #contact .label')) {
+            if (elementUnder && elementUnder.closest('.hero-accent-line, .hero-label, .hero-scroll, .contact-title, .terminal-text, .about-line, .hover-white-target, #about .label span, .expertise-card, .stat-box, .project-skeleton, .footer-right') && !elementUnder.closest('.contact-sub, #contact .label')) {
                 document.body.classList.add('cursor-white');
                 document.body.classList.remove('cursor-dark');
                 document.body.classList.remove('cursor-pink');
@@ -1588,7 +1588,7 @@
 
             // 2. Check Interactive Elements via elementFromPoint
             if (!isHovering && elementUnder) {
-                if (elementUnder.closest('a, button, .cta-btn, .about-content h2, .hover-white-target, .stat-val, .stat-label, .card-num, .card-title, .card-desc, .tag, .terminal-text, .skeleton-line')) {
+                if (elementUnder.closest('a, button, .cta-btn, .about-content h2, .hover-white-target, .stat-val, .stat-label, .card-num, .card-title, .card-desc, .tag, .terminal-text, .skeleton-line, .breakout-text')) {
                     isHovering = true;
                 }
             }
