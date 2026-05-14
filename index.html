@@ -5,6 +5,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kavuri Pavan Sai | Portfolio 2026</title>
+    <meta name="description" content="Kavuri Pavan Sai - AI Automation Engineer and Developer. Building autonomous systems, workflows, and intelligent conversational agents.">
+    <meta name="author" content="Kavuri Pavan Sai">
+    <meta property="og:title" content="Kavuri Pavan Sai | Portfolio">
+    <meta property="og:description" content="AI Automation Engineer. Builder by choice. Discover my selected work and expertise.">
+    <meta property="og:type" content="website">
+    <!-- <link rel="icon" type="image/x-icon" href="/favicon.ico"> -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -45,7 +51,9 @@
             * {
                 cursor: auto !important;
             }
-            .cursor-dot, .cursor-ring {
+
+            .cursor-dot,
+            .cursor-ring {
                 display: none !important;
             }
         }
@@ -303,18 +311,28 @@
             transition: 0.3s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        .hamburger span:nth-child(1) { top: 0; }
-        .hamburger span:nth-child(2) { top: 11px; }
-        .hamburger span:nth-child(3) { top: 22px; }
+        .hamburger span:nth-child(1) {
+            top: 0;
+        }
+
+        .hamburger span:nth-child(2) {
+            top: 11px;
+        }
+
+        .hamburger span:nth-child(3) {
+            top: 22px;
+        }
 
         .hamburger.active span:nth-child(1) {
             top: 11px;
             transform: rotate(45deg);
             background: var(--accent);
         }
+
         .hamburger.active span:nth-child(2) {
             opacity: 0;
         }
+
         .hamburger.active span:nth-child(3) {
             top: 11px;
             transform: rotate(-45deg);
@@ -367,10 +385,21 @@
             opacity: 1;
         }
 
-        .mobile-menu.active .mobile-link:nth-child(1) { transition-delay: 0.1s; }
-        .mobile-menu.active .mobile-link:nth-child(2) { transition-delay: 0.2s; }
-        .mobile-menu.active .mobile-link:nth-child(3) { transition-delay: 0.3s; }
-        .mobile-menu.active .mobile-link:nth-child(4) { transition-delay: 0.4s; }
+        .mobile-menu.active .mobile-link:nth-child(1) {
+            transition-delay: 0.1s;
+        }
+
+        .mobile-menu.active .mobile-link:nth-child(2) {
+            transition-delay: 0.2s;
+        }
+
+        .mobile-menu.active .mobile-link:nth-child(3) {
+            transition-delay: 0.3s;
+        }
+
+        .mobile-menu.active .mobile-link:nth-child(4) {
+            transition-delay: 0.4s;
+        }
 
         .mobile-link:hover {
             color: var(--accent);
@@ -414,29 +443,25 @@
             font-size: clamp(15rem, 35vw, 45rem);
             color: transparent;
             -webkit-text-stroke: 1px rgba(0, 255, 178, 0.1);
-            background: 
-                linear-gradient(
-                    180deg, 
-                    transparent 0%, 
-                    transparent 45%, 
-                    rgba(0, 255, 178, 0.4) 50%, 
-                    transparent 55%, 
-                    transparent 100%
-                ),
-                repeating-linear-gradient(
-                    0deg,
+            background:
+                linear-gradient(180deg,
+                    transparent 0%,
+                    transparent 45%,
+                    rgba(0, 255, 178, 0.4) 50%,
+                    transparent 55%,
+                    transparent 100%),
+                repeating-linear-gradient(0deg,
                     transparent,
                     transparent 4px,
                     rgba(0, 255, 178, 0.05) 4px,
-                    rgba(0, 255, 178, 0.05) 8px
-                );
+                    rgba(0, 255, 178, 0.05) 8px);
             background-size: 100% 200%, 100% 100%;
             -webkit-background-clip: text;
             background-clip: text;
             z-index: -1;
             white-space: nowrap;
             pointer-events: none;
-            animation: 
+            animation:
                 bg-text-scan 6s linear infinite,
                 bg-text-breathe 8s ease-in-out infinite alternate;
         }
@@ -496,21 +521,85 @@
         }
 
         @keyframes clean-text-slice {
-            0%, 9%, 12%, 100% { clip-path: inset(0 0 0 0); transform: translate(0, 0); }
-            10% { clip-path: inset(30% 0 65% 0); transform: translate(-30px, 0) skewX(-10deg); }
-            10.4% { clip-path: inset(70% 0 25% 0); transform: translate(40px, 0) skewX(5deg); filter: drop-shadow(0 0 10px rgba(0, 255, 178, 0.5)); }
-            10.8% { clip-path: inset(10% 0 85% 0); transform: translate(-20px, 0); filter: none; }
-            11.2% { clip-path: inset(50% 0 45% 0); transform: translate(30px, 0); }
-            11.6% { clip-path: inset(80% 0 5% 0); transform: translate(-10px, 0); }
+
+            0%,
+            9%,
+            12%,
+            100% {
+                clip-path: inset(0 0 0 0);
+                transform: translate(0, 0);
+            }
+
+            10% {
+                clip-path: inset(30% 0 65% 0);
+                transform: translate(-30px, 0) skewX(-10deg);
+            }
+
+            10.4% {
+                clip-path: inset(70% 0 25% 0);
+                transform: translate(40px, 0) skewX(5deg);
+                filter: drop-shadow(0 0 10px rgba(0, 255, 178, 0.5));
+            }
+
+            10.8% {
+                clip-path: inset(10% 0 85% 0);
+                transform: translate(-20px, 0);
+                filter: none;
+            }
+
+            11.2% {
+                clip-path: inset(50% 0 45% 0);
+                transform: translate(30px, 0);
+            }
+
+            11.6% {
+                clip-path: inset(80% 0 5% 0);
+                transform: translate(-10px, 0);
+            }
         }
 
         @keyframes glitch-lines {
-            0%, 9%, 12%, 100% { opacity: 0; top: 50%; }
-            10% { opacity: 1; top: 20%; transform: scaleX(0.8) skewX(20deg); }
-            10.4% { opacity: 1; top: 80%; transform: scaleX(1.1) skewX(-10deg); }
-            10.8% { opacity: 1; top: 40%; height: 5px; transform: scaleX(1.2); }
-            11.2% { opacity: 0.8; top: 60%; height: 1px; transform: scaleX(0.9) translateX(-50px); }
-            11.6% { opacity: 1; top: 10%; height: 3px; transform: scaleX(1.1) translateX(50px); }
+
+            0%,
+            9%,
+            12%,
+            100% {
+                opacity: 0;
+                top: 50%;
+            }
+
+            10% {
+                opacity: 1;
+                top: 20%;
+                transform: scaleX(0.8) skewX(20deg);
+            }
+
+            10.4% {
+                opacity: 1;
+                top: 80%;
+                transform: scaleX(1.1) skewX(-10deg);
+            }
+
+            10.8% {
+                opacity: 1;
+                top: 40%;
+                height: 5px;
+                transform: scaleX(1.2);
+            }
+
+            11.2% {
+                opacity: 0.8;
+                top: 60%;
+                height: 1px;
+                transform: scaleX(0.9) translateX(-50px);
+            }
+
+            11.6% {
+                opacity: 1;
+                top: 10%;
+                height: 3px;
+                transform: scaleX(1.1) translateX(50px);
+            }
         }
 
         .hero-grid {
@@ -552,11 +641,25 @@
         }
 
         @keyframes spotlightMove {
-            0% { transform: translate(0, 0); }
-            25% { transform: translate(15%, 10%); }
-            50% { transform: translate(-10%, 20%); }
-            75% { transform: translate(10%, -15%); }
-            100% { transform: translate(-15%, -10%); }
+            0% {
+                transform: translate(0, 0);
+            }
+
+            25% {
+                transform: translate(15%, 10%);
+            }
+
+            50% {
+                transform: translate(-10%, 20%);
+            }
+
+            75% {
+                transform: translate(10%, -15%);
+            }
+
+            100% {
+                transform: translate(-15%, -10%);
+            }
         }
 
         @keyframes gridMove {
@@ -696,7 +799,7 @@
         /* Rotating Circular Text */
         .rotating-text {
             position: absolute;
-            right: 12vw;
+            right: 10vw;
             top: 47%;
             transform: translateY(-50%);
             width: 250px;
@@ -771,7 +874,8 @@
             position: absolute;
             top: 0;
             left: 0;
-            width: 20px; /* wider hover target area */
+            width: 20px;
+            /* wider hover target area */
             height: 100%;
         }
 
@@ -838,7 +942,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-image: 
+            background-image:
                 linear-gradient(rgba(0, 255, 178, 0.05) 1px, transparent 1px),
                 linear-gradient(90deg, rgba(0, 255, 178, 0.05) 1px, transparent 1px);
             background-size: 20px 20px;
@@ -977,7 +1081,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-image: 
+            background-image:
                 linear-gradient(rgba(0, 255, 178, 0.06) 1px, transparent 1px),
                 linear-gradient(90deg, rgba(0, 255, 178, 0.06) 1px, transparent 1px);
             background-size: 20px 20px;
@@ -1113,8 +1217,17 @@
         }
 
         @keyframes pulse-border {
-            0%, 100% { border-color: rgba(0, 255, 178, 0.1); box-shadow: none; }
-            50% { border-color: rgba(0, 255, 178, 0.4); box-shadow: inset 0 0 15px rgba(0, 255, 178, 0.05); }
+
+            0%,
+            100% {
+                border-color: rgba(0, 255, 178, 0.1);
+                box-shadow: none;
+            }
+
+            50% {
+                border-color: rgba(0, 255, 178, 0.4);
+                box-shadow: inset 0 0 15px rgba(0, 255, 178, 0.05);
+            }
         }
 
         .skeleton-img {
@@ -1146,8 +1259,13 @@
         }
 
         @keyframes scanline {
-            0% { top: -20%; }
-            100% { top: 120%; }
+            0% {
+                top: -20%;
+            }
+
+            100% {
+                top: 120%;
+            }
         }
 
         .terminal-text {
@@ -1209,8 +1327,13 @@
         }
 
         @keyframes marquee {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(-50%); }
+            0% {
+                transform: translateX(0);
+            }
+
+            100% {
+                transform: translateX(-50%);
+            }
         }
 
         #contact {
@@ -1431,7 +1554,8 @@
     <div class="cursor-ring"></div>
 
     <nav>
-        <a href="#" class="nav-logo bebas" onclick="if(window.scrollY < 10) { window.location.reload(); return false; }">KPS</a>
+        <a href="#" class="nav-logo bebas"
+            onclick="if(window.scrollY < 10) { window.location.reload(); return false; }">KPS</a>
         <div class="nav-links">
             <a href="#about">// About</a>
             <a href="#skills">// Skills</a>
@@ -1546,7 +1670,8 @@
         <div class="container reveal">
             <div class="section-header">
                 <div class="label" style="color: var(--white); opacity: 0.7;">
-                    <span class="hover-white-target" style="color: var(--accent); font-weight: 700;">02</span> / EXPERTISE
+                    <span class="hover-white-target" style="color: var(--accent); font-weight: 700;">02</span> /
+                    EXPERTISE
                 </div>
             </div>
 
@@ -1596,11 +1721,13 @@
     <section id="work" class="container reveal">
         <div class="work-header">
             <div class="label" style="color: var(--white); opacity: 0.7;">
-                <span class="hover-white-target" style="color: var(--accent); font-weight: 700;">03</span> / SELECTED WORK
+                <span class="hover-white-target" style="color: var(--accent); font-weight: 700;">03</span> / SELECTED
+                WORK
             </div>
         </div>
 
-        <h2 class="syne hover-white-target" style="font-size: clamp(2rem, 4vw, 3rem); margin-bottom: 2rem; display: inline-block;">Projects <span
+        <h2 class="syne hover-white-target"
+            style="font-size: clamp(2rem, 4vw, 3rem); margin-bottom: 2rem; display: inline-block;">Projects <span
                 style="color: var(--accent); font-size: 1rem; vertical-align: middle;">(Coming Soon)</span></h2>
 
         <div class="projects-loading-grid">
@@ -1631,7 +1758,9 @@
 
     <div class="marquee-wrapper">
         <div class="marquee-track">
-            /// AVAILABLE FOR FREELANCE /// LET'S BUILD /// AVAILABLE FOR FREELANCE /// LET'S BUILD /// AVAILABLE FOR FREELANCE /// LET'S BUILD /// AVAILABLE FOR FREELANCE /// LET'S BUILD /// AVAILABLE FOR FREELANCE /// LET'S BUILD /// AVAILABLE FOR FREELANCE /// LET'S BUILD /// 
+            /// AVAILABLE FOR FREELANCE /// LET'S BUILD /// AVAILABLE FOR FREELANCE /// LET'S BUILD /// AVAILABLE FOR
+            FREELANCE /// LET'S BUILD /// AVAILABLE FOR FREELANCE /// LET'S BUILD /// AVAILABLE FOR FREELANCE /// LET'S
+            BUILD /// AVAILABLE FOR FREELANCE /// LET'S BUILD ///
         </div>
     </div>
 
@@ -1640,7 +1769,8 @@
         <div class="container contact-container">
             <div class="label"
                 style="color: var(--bg); border-bottom: 1px solid var(--bg); display: inline-block; padding-bottom: 0.5rem; margin-bottom: 2rem;">
-                <span style="font-weight: 700;">04</span> / LET'S TALK</div>
+                <span style="font-weight: 700;">04</span> / LET'S TALK
+            </div>
 
             <h2 class="contact-title bebas hover-white-target">GOT A PROJECT?</h2>
             <p class="contact-sub">Whether it's automating your business or building something from scratch &mdash; I'm
@@ -1684,7 +1814,7 @@
         // Mobile Menu Logic
         const hamburger = document.querySelector('.hamburger');
         const mobileMenu = document.getElementById('mobile-menu');
-        
+
         function toggleMobileMenu() {
             hamburger.classList.toggle('active');
             mobileMenu.classList.toggle('active');
